@@ -1,0 +1,4 @@
+trigger: none
+
+pool:
+  name: 'Default'
