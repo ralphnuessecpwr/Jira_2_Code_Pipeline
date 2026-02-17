@@ -2,3 +2,15 @@ trigger: none
 
 pool:
   name: 'Default'
+
+stages:
+- stage: Test
+  jobs:
+  - job:
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo %$(issueId)%
+          
+          echo %$(issueKey)%
