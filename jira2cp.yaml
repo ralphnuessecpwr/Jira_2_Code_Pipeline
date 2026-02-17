@@ -18,3 +18,4 @@ stages:
           Write-Host "Status: $(issueStatus)"
           Write-Host "Status Name: $(issueStatusName)"
           Write-Host "Assignment: $(issueCpAssignment)"
+          Write-Host "Assignee: $(issueAssignee)"
