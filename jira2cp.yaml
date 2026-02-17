@@ -15,3 +15,6 @@ stages:
         script: |
           Write-Host "Key: $(issueKey)"
           Write-Host "Id: $(issueId)"
+          Write-Host "Status: $(issueStatus)"
+          Write-Host "Status Name: $(issueStatusName)"
+          Write-Host "Assignment: $(issueCpAssignment)"
