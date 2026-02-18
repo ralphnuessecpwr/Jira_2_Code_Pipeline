@@ -12,8 +12,7 @@ stages:
 - stage: ProcessTicket
   displayName: Process
   jobs:
-  - job:
-    name: processTicket
+  - job: processTicket
     displayName: Process Jira Ticket
     steps:
     - checkout: none
@@ -34,7 +33,7 @@ stages:
     - task: PowerShell@2
       name: createAssignment
       displayName: Create Assignment
-      cond: eq(issueAssignment, "<none>")
+      condition: eq(variables['issueCpAssignment'], '<none>')
       inputs:
         targetType: 'inline'
         script: |
@@ -73,9 +72,10 @@ stages:
           Write-Host "Assignment created: $(assignmentId)"
 
           Write-Host "##vso[task.setvariable variable=assignmentId;isoutput=true]$assignmentId"
-    - task: 
-      name: Add Assignment to Ticket
-      cond: eq(issueAssignment, "<none>")
+    - task: PowerShell@2
+      name: addAssignment2Ticket
+      displayName: Add Assignment to Ticket
+      condition: eq(variables['issueCpAssignment'], '<none>')
       inputs:
         targetType: 'inline'
         script: |
@@ -99,4 +99,4 @@ stages:
               Exit 1
           }
 
-          Write-Host "Ticket $(issueKey) updated with Assignment ID: $(createAssignment.assignmentId)"
+          Write-Host "Ticket $(issueKey) updated with Assignment ID: $(createAssignment.assignmentId)"    
