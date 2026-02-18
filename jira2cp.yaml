@@ -23,12 +23,12 @@ stages:
         targetType: 'inline'
         script: |
           Write-Host "Parameters received from Jira:"
-          Write-Host "Issue Key                : $(issueKey)"
-          Write-Host "Issue Id                 : $(issueId)"
-          Write-Host "Issue Status             : $(issueStatus)"
-          Write-Host "Issue Status Name        : $(issueStatusName)"
-          Write-Host "Issue Assignee           : $(issueAssignee)"
-          Write-Host "Code Pipeline Assignment : $(issueCpAssignment)"
+          Write-Host "Issue Key                : '$(issueKey)'"
+          Write-Host "Issue Id                 : '$(issueId)'"
+          Write-Host "Issue Status             : '$(issueStatus)'"
+          Write-Host "Issue Status Name        : '$(issueStatusName)'"
+          Write-Host "Issue Assignee           : '$(issueAssignee)'"
+          Write-Host "Code Pipeline Assignment : '$(issueCpAssignment)'"
     # Create an assignment, in case the assignment has not been set for the ticket in question
     - task: PowerShell@2
       name: createAssignment
