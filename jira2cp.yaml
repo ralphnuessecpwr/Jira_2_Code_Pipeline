@@ -40,7 +40,7 @@ stages:
           Write-Host "Creating new Assignment for Jira Ticket $(issueKey)."
 
           $requestHeaders = @{}
-          $requestHeaders.add("Authorization", "$(cesToken)"
+          $requestHeaders.add("Authorization", "$(cesToken)")
           $requestHeaders.add("Content-Type", "application/json")
 
           $requestBody  = '{
@@ -82,7 +82,7 @@ stages:
           Write-Host "Adding Assignment ID $(assignmentId) to Jira Ticket $(issueKey)."
 
           $requestHeaders = @{}
-          $requestHeaders.add("Authorization", "$(jiraToken)"
+          $requestHeaders.add("Authorization", "$(jiraToken)")
           $requestHeaders.add("Content-Type", "application/json")
 
           $requestBody  = '{"fields":{"$(jiraAssignmentFieldId)":"$(createAssignment.assignmentId)"}}'
