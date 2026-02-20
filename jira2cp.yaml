@@ -47,6 +47,7 @@ stages:
             "stream": "$(cpStream)",
             "application": "$(cpApplication)",
             "subAppl": "$(cpSubApp)",
+            "runtimeConfiguration": "$(cpRuntime)"
             "defaultPath": "$(cpAssignmentDefaultPath)",
             "description": "$(issueSummary)",
             "owner": "$(cpAssignmentOwner)",
@@ -62,16 +63,17 @@ stages:
           Write-Host "Using Body:"
           Write-Host $requestBody
 
-
-              $response   = Invoke-WebRequest -Method POST -Uri $restUri -Headers $requestHeaders -Body $requestBody 
+          Write-Host "Comman"
+          Write-Host "$response   = Invoke-WebRequest -Method POST -Uri $restUri -Headers $requestHeaders -Body $requestBody "
+              
+              $response = Invoke-WebRequest -Method POST -Uri $restUri -Headers $requestHeaders -Body $requestBody
               $statusCode = $response.StatusCode
               Write-Host $statusCode
           
-
           $assignmentInfo   = ConvertFrom-Json $response
           $assignmentId     = $assignmentInfo.assignmentId
 
-          Write-Host "Assignment created: $(assignmentId)"
+          Write-Host "Assignment created: $assignmentId"
 
           Write-Host "##vso[task.setvariable variable=assignmentId;isoutput=true]$assignmentId"
     - task: PowerShell@2
