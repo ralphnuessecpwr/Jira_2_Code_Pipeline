@@ -12,8 +12,7 @@ stages:
 - stage: ProcessTicket
   displayName: Process
   jobs:
-  - job:
-    name: processTicket
+  - job: processTicket
     displayName: Process Jira Ticket
     steps:
     - checkout: none
@@ -24,24 +23,24 @@ stages:
         targetType: 'inline'
         script: |
           Write-Host "Parameters received from Jira:"
-          Write-Host "Issue Key                : $(issueKey)"
-          Write-Host "Issue Id                 : $(issueId)"
-          Write-Host "Issue Status             : $(issueStatus)"
-          Write-Host "Issue Status Name        : $(issueStatusName)"
-          Write-Host "Issue Assignee           : $(issueAssignee)"
-          Write-Host "Code Pipeline Assignment : $(issueCpAssignment)"
+          Write-Host "Issue Key                : '$(issueKey)'"
+          Write-Host "Issue Id                 : '$(issueId)'"
+          Write-Host "Issue Status             : '$(issueStatus)'"
+          Write-Host "Issue Status Name        : '$(issueStatusName)'"
+          Write-Host "Issue Assignee           : '$(issueAssignee)'"
+          Write-Host "Code Pipeline Assignment : '$(issueCpAssignment)'"
     # Create an assignment, in case the assignment has not been set for the ticket in question
     - task: PowerShell@2
       name: createAssignment
       displayName: Create Assignment
-      cond: eq(issueAssignment, "<none>")
+      condition: eq(variables['issueCpAssignment'], '<none>')
       inputs:
         targetType: 'inline'
         script: |
           Write-Host "Creating new Assignment for Jira Ticket $(issueKey)."
 
           $requestHeaders = @{}
-          $requestHeaders.add("Authorization", "$(cesToken)"
+          $requestHeaders.add("Authorization", "$(cesToken)")
           $requestHeaders.add("Content-Type", "application/json")
 
           $requestBody  = '{
@@ -79,16 +78,17 @@ stages:
           Write-Host "Assignment created: $(assignmentId)"
 
           Write-Host "##vso[task.setvariable variable=assignmentId;isoutput=true]$assignmentId"
-    - task: 
-      name: Add Assignment to Ticket
-      cond: eq(issueAssignment, "<none>")
+    - task: PowerShell@2
+      name: addAssignment2Ticket
+      displayName: Add Assignment to Ticket
+      condition: eq(variables['issueCpAssignment'], '<none>')
       inputs:
         targetType: 'inline'
         script: |
           Write-Host "Adding Assignment ID $(assignmentId) to Jira Ticket $(issueKey)."
 
           $requestHeaders = @{}
-          $requestHeaders.add("Authorization", "$(jiraToken)"
+          $requestHeaders.add("Authorization", "$(jiraToken)")
           $requestHeaders.add("Content-Type", "application/json")
 
           $requestBody  = '{"fields":{"$(jiraAssignmentFieldId)":"$(createAssignment.assignmentId)"}}'
@@ -105,4 +105,4 @@ stages:
               Exit 1
           }
 
-          Write-Host "Ticket $(issueKey) updated with Assignment ID: $(createAssignment.assignmentId)"
+          Write-Host "Ticket $(issueKey) updated with Assignment ID: $(createAssignment.assignmentId)"    
