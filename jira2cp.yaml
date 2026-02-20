@@ -63,7 +63,7 @@ stages:
           Write-Host $requestBody
 
 
-              $response   = Invoke-WebRequest -Method POST -Uri $restUri -Headers $requestHeaders -Body $requestBody -SkipHttpErrorCheck True
+              $response   = Invoke-WebRequest -Method POST -Uri $restUri -Headers $requestHeaders -Body $requestBody 
               $statusCode = $response.StatusCode
               Write-Host $statusCode
           
