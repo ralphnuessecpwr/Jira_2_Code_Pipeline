@@ -62,18 +62,11 @@ stages:
           Write-Host "Using Body:"
           Write-Host $requestBody
 
-          try{
+
               $response   = Invoke-WebRequest -Method POST -Uri $restUri -Headers $requestHeaders -Body $requestBody -SkipHttpErrorCheck
               $statusCode = $response.StatusCode
               Write-Host $statusCode
-          }
-          catch {
-              $statusCode = $_.Exception.Response.StatusCode.value__
-              Write-Host "`nAn error occurred for REST call"
-              Write-Host $statusCode
-              Write-Host $response
-              Exit 1
-          }
+          
 
           $assignmentInfo   = ConvertFrom-Json $response
           $assignmentId     = $assignmentInfo.assignmentId
