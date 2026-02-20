@@ -58,12 +58,18 @@ stages:
           $errorMessage = ""
           $restUri      = "$(cesUrl)/ispw/$(cpRuntime)/assignments"
 
+          Write-Host "Calling Url:"
+          Write-Host $restUri
+          Write-Host "Using Body:"
+          Write-Host $requestBody
+
           try{
               $response = Invoke-WebRequest -Method POST -Uri $restUri -Headers $requestHeaders -Body $requestBody
           }
           catch {
               Write-Host "`nAn error occurred for REST call"
               Write-Host $_
+              Write-Host $response
               Exit 1
           }
 
