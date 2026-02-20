@@ -101,7 +101,7 @@ stages:
           $restUri      = "$(jiraUrl)/rest/api/2/issue/$(issueId)"
 
           try{
-              $response = Invoke-WebRequest -Method PUT -Uri $restUri -Headers $requestHeaders -Body $requestBody
+              $response = Invoke-WebRequest -Method PUT -Uri $restUri -Headers $requestHeaders -Body $requestBody -UseBasicParsing
           }
           catch {
               Write-Host "`nAn error occurred for REST call"
