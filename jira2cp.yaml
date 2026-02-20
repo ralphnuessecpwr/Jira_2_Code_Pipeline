@@ -89,7 +89,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          Write-Host "Adding Assignment ID $(assignmentId) to Jira Ticket $(issueKey)."
+          Write-Host "Adding Assignment ID $(createAssignment.assignmentId) to Jira Ticket $(issueKey)."
 
           $requestHeaders = @{}
           $requestHeaders.add("Authorization", "$(jiraToken)")
