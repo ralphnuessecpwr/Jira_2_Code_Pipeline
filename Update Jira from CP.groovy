@@ -9,11 +9,6 @@ Parameters
     cpSrcLevel
 */
 
-def cesCpUrl                = 'http://cwcc.bmc.com:2020'
-def cesToken                = '665fc9fb-39de-428a-8a67-a3619752873d'
-
-def jiraUrl                 = 'https://ralphnuesse.atlassian.net'
-def jiraToken               = 'Basic cmFscGgubnVlc3NlQGdtYWlsLmNvbTpBVEFUVDN4RmZHRjBrUHVnaktkRmtTS3cyemxuWHZpbi0yejZKN08zQXR2UEY0WVVsX2RwcHA0Z0dXOEtXWXY2bTVVY1gyU0c5eUNmYVUwTFRBVkQwTjY5LVE4UmVyTEszRW4tdHdFWUNJVmkwaXhOempKcThDakFjWHdua25nN1JYS1dXajcyMl9JU2RGTVJ4X0V4TklZQVJGWTk0Y0VJa09nZFY2YTNmNTd0SmtrOXZFRGpic2s9RjBFQzBGMDY='
 def jiraAssignmentIdField   = "customfield_10082"
 def jiraTaskListField       = "customfield_10084"
 def jiraIssueId
